@@ -1,0 +1,81 @@
+<html>
+
+<body onkeydown="keypressed(event)"
+onkeyup="keyup(event)">
+
+<canvas id="canvas" color="black" width="750" height="750" src="Ro-ad.png"></canvas>
+</body>
+<script type="text/javascript">
+	var canvas=document.getElementById("canvas");
+	var context=canvas.getContext("2d");
+	function keyup(key){
+	if(key.keyCode==37|| key.keyCode==39){
+		speed=0;
+		}
+		if(key.keyCode==38 || key.keyCode==40){
+		speedY=0;
+		}
+	}
+	function keypressed(key){
+		console.log(key.keyCode);
+		if(key.keyCode==39){
+		speed=5;
+		}
+		if(key.keyCode==37){
+		speed=-5;
+		}
+		if(key.keyCode==38){
+		speedY=-5
+		}
+		if(key.keyCode==40){
+		speedY=5
+		}
+	}
+	function car2(){
+		context.beginPath();
+		context.moveTo(x,y+115);
+		context.lineTo(x,y);
+		context.lineTo(x+30,y);
+		context.lineTo(x+30,y+115);
+		context.closePath();
+		context.fillStyle="yellow";
+		context.fill();
+	}
+	var x=5;
+	var y=5;
+	var speed=0;
+	var speedY=0;
+	function draw(){
+		/*if(x==500 || x==0){
+			speed*=-1
+		}*/
+		x+=speed;
+		y+=speedY;
+			context.clearRect(0,0,canvas.width,canvas.height);
+			//car2();
+			context.drawImage(road,0,0);
+			context.drawImage(car,x,y);
+			setTimeout(draw,20);
+	}
+	
+	
+	function Player(carbot){
+this.carbot=carbot;
+this.x=0;
+this.y=0;
+this.width=100;
+this.height=100;
+}
+	
+	
+	var road=new Image();
+	road.src="road2.gif"
+	var car=new Image(); 
+	car.src="carimg.png";
+	var carbot=new Player("carbot");
+	carbot.src="carbot1.png"
+	draw();
+	</script>
+	<script type="text/javascript" src="http://gamesbyalex.com/lugonian_engine.js"></script>
+</html>
+	
